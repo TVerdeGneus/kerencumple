@@ -2,48 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('background-music');
   const playButton = document.getElementById('play-music-button');
 
-  // Lista de canciones
   const playlist = [
     "Niños del Cerro - Povidona - reinterpretación en piano.mp3",
     "OMORI - Final Duet - Piano Only - Pedro Silva.mp3"
   ];
 
-  // Obtener estado guardado
   let currentTrack = parseInt(localStorage.getItem('audioTrack')) || 0;
   let savedTime = parseFloat(localStorage.getItem('audioTime')) || 0;
-  const alreadyPlayed = localStorage.getItem('musicPlayed') === 'true';
 
   audio.src = playlist[currentTrack];
   audio.volume = 0.25;
 
-  // Aplicar tiempo guardado al cargar los metadatos del audio
   audio.addEventListener('loadedmetadata', () => {
     if (!isNaN(savedTime)) {
       audio.currentTime = savedTime;
     }
-    // Si ya se había iniciado en otra página, continuar automáticamente
-    if (alreadyPlayed) {
-      audio.play().catch(() => {});
+
+    // Intentar reproducir
+    audio.play().then(() => {
       if (playButton) playButton.style.display = 'none';
-    }
+    }).catch(() => {
+      // Si el navegador bloquea el autoplay, mostrar el botón
+      if (playButton) playButton.style.display = 'block';
+    });
   });
 
-  // Botón de inicio de música
   if (playButton) {
     playButton.addEventListener('click', () => {
       audio.play().catch(() => {});
       playButton.style.display = 'none';
-      localStorage.setItem('musicPlayed', 'true');
     });
   }
 
-  // Guardar tiempo y pista antes de salir
   window.addEventListener('beforeunload', () => {
     localStorage.setItem('audioTime', audio.currentTime);
     localStorage.setItem('audioTrack', currentTrack);
   });
 
-  // Cambiar de pista cuando termina
   audio.addEventListener('ended', () => {
     currentTrack = (currentTrack + 1) % playlist.length;
     localStorage.setItem('audioTrack', currentTrack);
@@ -51,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.src = playlist[currentTrack];
     audio.play().catch(() => {});
   });
+});
+
 
   /* ========== ANIMACIÓN DE BLOQUES (si la usas en tus páginas) ========== */
   const options = { threshold: 0.1 };
