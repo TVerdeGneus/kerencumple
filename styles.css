@@ -1,0 +1,154 @@
+/* ========== RESET & BASE ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fondo usando "clouds.png" como pattern de 250px */
+body {
+  background: url('clouds.png') repeat;
+  background-size: 250px 250px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #000;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ========== LLUVIA ========== */
+#rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;  /* La lluvia se muestra sobre el contenido */
+  overflow: hidden;
+}
+
+.drop {
+  position: absolute;
+  top: -100px;
+  width: 2px;
+  height: 60px;
+  background: #a0c8f0;
+  opacity: 0.5;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(120vh);
+  }
+}
+
+/* ========== CONTENIDO PRINCIPAL (CUADRO BLANCO) ========== */
+.container {
+  width: 100%;       /* Ocupa todo el ancho */
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+
+  border-radius: 5px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+/* ========== PÁRRAFOS & GIRASOL ========== */
+.paragraph-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 2rem;
+  text-align: left;
+  opacity: 0;                   /* Inicia invisible */
+  transform: translateX(-50px); /* Se desliza desde la izquierda */
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+.button-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.cute-button {
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cute-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sunflower {
+  width: 70px;              /* Tamaño aumentado */
+  height: auto;
+  margin-right: 1rem;
+  animation: rotateSunflower 10s linear infinite;  /* Rotación continua */
+  transform-origin: center;
+}
+
+@keyframes rotateSunflower {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.paragraph-container p {
+  margin: 0;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+@media (max-width: 600px) {
+  .paragraph-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .sunflower {
+    margin: 0 0 1rem 0;
+  }
+  .paragraph-container p {
+    max-width: 100%;
+  }
+}
+
+/* ========== ANIMACIÓN DE BLOQUE ========== */
+.paragraph-container.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========== SECCIÓN FINAL ========== */
+.final-section {
+  background: url('cloudsfinal.png') no-repeat center bottom;
+  background-size: contain;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  min-height: 100vh;  /* Ocupa al menos toda la pantalla al final */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.final-section h2 {
+  font-size: 2rem;
+  color: #000;
+}

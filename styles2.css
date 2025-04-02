@@ -1,0 +1,165 @@
+/* Reinicio básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Fondo con degradado */
+  body {
+    background: linear-gradient(45deg, #ff9409, #ff7709);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #000;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Contenedor principal que se ajusta automáticamente */
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Cita del poema */
+  .quote-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+  .quote-container blockquote {
+    quotes: "“" "”" "‘" "’";
+  }
+  .quote-container blockquote:before {
+    content: open-quote;
+  }
+  .quote-container blockquote:after {
+    content: close-quote;
+  }
+  
+  /* Bloques de párrafos y girasoles */
+  .paragraph-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+  .paragraph-container p {
+    margin-left: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Girasol con animación de rotación */
+  .sunflower {
+    width: 70px;
+    height: auto;
+    animation: rotateSunflower 10s linear infinite;
+  }
+  
+  @keyframes rotateSunflower {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Adaptación para dispositivos pequeños */
+  @media (max-width: 600px) {
+    .paragraph-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .paragraph-container p {
+      margin-left: 0;
+    }
+  }
+  
+  /* Botón "cute" */
+  .button-container {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .cute-button {
+    display: inline-block;
+    background: #ffc8b2;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .cute-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Lluvia (opcional) */
+  #rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+  }
+  
+  /* Overlay oscuro (opcional) */
+  .dark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  .pixel-art {
+    width: 100%;
+    max-width: 250px;  /* Tamaño máximo deseado */
+    height: auto;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  
+  .pixelart-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .video-preview {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .video-preview p {
+    margin-bottom: 1rem;
+  }
+  
+  .video-link {
+    display: inline-block;
+    background: #ffc8b2;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .video-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
