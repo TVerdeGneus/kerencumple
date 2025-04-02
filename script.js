@@ -13,23 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
   audio.src = playlist[currentTrack];
   audio.volume = 0.25;
 
-  audio.addEventListener('loadedmetadata', () => {
+  audio.addEventListener('canplaythrough', () => {
     if (!isNaN(savedTime)) {
       audio.currentTime = savedTime;
     }
 
-    // Intentar reproducir automáticamente
-    audio.play().then(() => {
-      if (playButton) playButton.style.display = 'none';
-    }).catch(() => {
-      if (playButton) playButton.style.display = 'block';
-    });
+    // Mostrar siempre el botón hasta que el usuario haga clic
+    if (playButton) playButton.style.display = 'block';
   });
 
   if (playButton) {
     playButton.addEventListener('click', () => {
-      audio.play().catch(() => {});
-      playButton.style.display = 'none';
+      audio.play().then(() => {
+        playButton.style.display = 'none';
+        localStorage.setItem('musicPlayed', 'true');
+      }).catch(() => {
+        alert('Tu navegador bloqueó la reproducción automática. Toca el botón de nuevo :)');
+      });
     });
   }
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.play().catch(() => {});
   });
 
-  /* ========== ANIMACIÓN DE BLOQUES ========== */
+  // Animaciones de bloque
   const options = { threshold: 0.1 };
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -57,11 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, options);
 
-  document.querySelectorAll('.animate-block').forEach(el => {
-    observer.observe(el);
-  });
+  document.querySelectorAll('.animate-block').forEach(el => observer.observe(el));
 
-  /* ========== EFECTO DE LLUVIA ========== */
+  // Lluvia
   const rainContainer = document.getElementById('rain-container');
   if (rainContainer) {
     const numDrops = 40;
