@@ -18,11 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.currentTime = savedTime;
     }
 
-    // Intentar reproducir
+    // Intentar reproducir automáticamente
     audio.play().then(() => {
       if (playButton) playButton.style.display = 'none';
     }).catch(() => {
-      // Si el navegador bloquea el autoplay, mostrar el botón
       if (playButton) playButton.style.display = 'block';
     });
   });
@@ -46,10 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.src = playlist[currentTrack];
     audio.play().catch(() => {});
   });
-});
 
-
-  /* ========== ANIMACIÓN DE BLOQUES (si la usas en tus páginas) ========== */
+  /* ========== ANIMACIÓN DE BLOQUES ========== */
   const options = { threshold: 0.1 };
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -64,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 
-  /* ========== EFECTO DE LLUVIA (si existe) ========== */
+  /* ========== EFECTO DE LLUVIA ========== */
   const rainContainer = document.getElementById('rain-container');
   if (rainContainer) {
     const numDrops = 40;
