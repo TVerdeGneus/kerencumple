@@ -15,7 +15,16 @@
     position: relative;
     overflow-x: hidden;
   }
-  
+  .cute-button {
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
   /* Contenedor principal que se ajusta automáticamente */
   .container {
     width: 90%;
