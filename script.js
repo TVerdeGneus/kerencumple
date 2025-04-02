@@ -28,48 +28,31 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.animate-block').forEach(el => {
     observer.observe(el);
   });
-document.addEventListener('DOMContentLoaded', () => {
-  const audio = document.getElementById('background-music');
-  const playButton = document.getElementById('play-music-button');
 
+
+  /* ========== 3. AUDIO DE FONDO ========== */
   const playlist = [
     "Niños del Cerro - Povidona - reinterpretación en piano.mp3",
     "OMORI - Final Duet - Piano Only - Pedro Silva.mp3"
   ];
+  let currentTrack = 0;
+  const audioElement = document.getElementById('background-music');
+  audioElement.volume = 0.25; // Ajusta el volumen según lo necesites
 
-  let currentTrack = parseInt(localStorage.getItem('audioTrack')) || 0;
-  let savedTime = parseFloat(localStorage.getItem('audioTime')) || 0;
-
-  audio.src = playlist[currentTrack];
-  audio.volume = 0.25;
-
-  // Aplicar tiempo guardado al cargar
-  audio.addEventListener('loadedmetadata', () => {
-    if (!isNaN(savedTime)) {
-      audio.currentTime = savedTime;
-    }
+  // Configuramos el botón para iniciar la música
+  const playMusicButton = document.getElementById('play-music-button');
+  playMusicButton.addEventListener('click', () => {
+    audioElement.src = playlist[currentTrack];
+    audioElement.play();
+    // Oculta el botón una vez iniciada la reproducción
+    playMusicButton.style.display = 'none';
   });
 
-  // Al hacer clic en el botón de música
-  playButton.addEventListener('click', () => {
-    audio.play();
-    playButton.style.display = 'none';
-  });
-
-  // Guardar el tiempo antes de salir
-  window.addEventListener('beforeunload', () => {
-    localStorage.setItem('audioTime', audio.currentTime);
-    localStorage.setItem('audioTrack', currentTrack);
-  });
-
-  // Cuando termina la canción, pasa a la siguiente
-  audio.addEventListener('ended', () => {
+  // Cuando una canción termina, se pasa a la siguiente
+  audioElement.addEventListener('ended', () => {
     currentTrack = (currentTrack + 1) % playlist.length;
-    localStorage.setItem('audioTrack', currentTrack);
-    localStorage.setItem('audioTime', 0);
-    audio.src = playlist[currentTrack];
-    audio.play();
+    audioElement.src = playlist[currentTrack];
+    audioElement.play();
   });
 });
-
 
