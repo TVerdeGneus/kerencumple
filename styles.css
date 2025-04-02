@@ -152,3 +152,17 @@ body {
   font-size: 2rem;
   color: #000;
 }
+/* Fuente pixel art para el cuerpo del texto */
+body {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px; /* esta fuente es pequeña, puedes ajustarla */
+  line-height: 1.8;
+}
+
+/* Fuente seria para títulos */
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+}
+
+/* Puedes usar la misma fuente de título para otros encabezados si los tienes */
